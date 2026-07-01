@@ -1,0 +1,99 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api.spec.ts >> Get All Products API
+- Location: tests/api.spec.ts:4:5
+
+# Error details
+
+```
+Error: expect(received).toBeTruthy()
+
+Received: false
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | //pass page instead of request for api
+  4  | test('Get All Products API', async ({ request }) => {
+  5  | 
+  6  |     const response = await request.get('https://automationexercise.com/api/productsList')
+  7  | 
+  8  |     //convert response to json
+  9  |     const data = await response.json();
+  10 |     console.log(data);
+  11 | 
+  12 |     expect(response.status()).toBe(200);
+  13 |     expect(response.ok()).toBeTruthy();
+> 14 |     expect(Array.isArray(data.product)).toBeTruthy();
+     |                                         ^ Error: expect(received).toBeTruthy()
+  15 | 
+  16 |     expect(data.responseCode).toBe(200);
+  17 |     expect(data.products.length).toBeGreaterThan(0);
+  18 |     expect(Array.isArray(data.products)).toBeTruthy();
+  19 | 
+  20 |     expect(data.products[0].id).toBe(1);
+  21 | 
+  22 | })
+  23 | 
+  24 | test('Create A product API', async ({ request }) => {
+  25 | 
+  26 |     const response = await request.post('https://automationexercise.com/api/createProduct', {
+  27 |         data: {
+  28 |             name: "Sundress for Women",
+  29 |             price: "Rs. 2000",
+  30 |             brand: "Madame"
+  31 |         }
+  32 |     })
+  33 |     const responseBody = await response.json();
+  34 |     console.log(responseBody);
+  35 |     expect(response.status()).toBe(201);
+  36 | 
+  37 | })
+  38 | 
+  39 | test('Verify Login with Invalid Details', async ({ request }) => {
+  40 |     const response = await request.post('https://automationexercise.com/api/verifyLogin', {
+  41 |         data: {
+  42 |             email: "Binary@1234.com",
+  43 |             password: "Binary@1234"
+  44 |         }
+  45 |     })
+  46 |     console.log(await response.json());
+  47 |     expect(response.status()).toBe(200);
+  48 | })
+  49 | 
+  50 | test('Update Invalid User Details', async ({ request }) => {
+  51 |     const response = await request.put('https://automationexercise.com/api/updateAccount', {
+  52 |         data: {
+  53 |             password: "Binarys@1234"
+  54 |         }
+  55 |     })
+  56 |     console.log(await response.json());
+  57 |     expect(response.status()).toBe(200);
+  58 |     expect(await response.json()).toEqual({ "message": "Bad request, email parameter is missing in PUT request." });
+  59 | })
+  60 | 
+  61 | test('Delete Invalid User Details', async ({ request }) => {
+  62 |     const response = await request.delete('https://automationexercise.com/api/deleteAccount', {
+  63 |         data: {
+  64 |             email: "Binary@1234.com",
+  65 |             password: "Binary@1234"
+  66 |         }
+  67 |     })
+  68 |     const responseBody = await response.json();
+  69 |     console.log(responseBody);
+  70 |     expect(response.status()).toBe(200);
+  71 |     expect(responseBody).toEqual({
+  72 |         "responseCode": 400,
+  73 |         "message": "Bad request, email parameter is missing in DELETE request."
+  74 |     });
+  75 | })
+```

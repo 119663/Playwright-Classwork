@@ -1,0 +1,3 @@
+Base URL in beforeAll: https://test.workpay.co.ke/api/v2
+Status: 400
+Body: {"success":false,"message":"Email\/password is required","data":[]}
