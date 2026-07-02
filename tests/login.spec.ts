@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import users from '../test-data/users.json';
 import dotenv from 'dotenv';
 
-dotenv.config({path: '.env/.env.test'});
+dotenv.config();
 
 test('Login on system', async ({ page }) => {
 

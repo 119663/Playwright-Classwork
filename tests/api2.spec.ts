@@ -3,7 +3,12 @@ import { test, expect } from '@playwright/test';
 //pass page instead of request for api
 test('Get All Products API', async ({ request }) => {
 
-    const response = await request.get('https://automationexercise.com/api/productsList')
+    const response = await request.get('https://automationexercise.com/api/productsList',{
+            headers: {
+            'Content-Type': 'application/json',
+            "Authorization ": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdGVzdC53b3JrcGF5LmNvLmtlL2FwaS92Mi91c2VyL2xvZ2luIiwiaWF0IjoxNzgyNDAxNDQ4LCJleHAiOjE3ODI0NDQ2NDgsIm5iZiI6MTc4MjQwMTQ0OCwianRpIjoiTjZaWEhMRlc2TXJESGJzTyIsInN1YiI6IjE1MzI0IiwicHJ2IjoiNTFlMmQxNjcwNzdhNmQzYjE3ZjhiYzg1YTczZTg4MjViOWFkMDlkNiIsImFmIjoiZXlKcGRpSTZJa3haZFhkeFZXeGhPRkpSTm5rMk1pOVpNekZaVFdjOVBTSXNJblpoYkhWbElqb2lNMlJ3VkVaR2NUSTVhWGRUYkU4clNWUTJUMHRaWmtsMVowMVZWa0UyYUVvMWRVRlRVbkIxYTI5NGVqTnBaRnBTVWtOT0wzbG9RazlKUkcxcFlVaDFZeUlzSW0xaFl5STZJalJrTTJZNU1EaGlaRGxoTUdZMFltSXhOVEZqT1ROaU1tUmtPV0UwWmpnME5Ua3lNR0V5TldWa04yUXpOamt4TkRSaE16bGlaREE0WlRkaE5HRmlabVVpTENKMFlXY2lPaUlpZlE9PSJ9.YvAwdT_d0_2AyHh6xX7Y4NujUbqXKkmmDEzuxaMwbRA"
+        }
+})
 
     //convert response to json
     const data = await response.json();
@@ -50,7 +55,8 @@ test('Get All Products API', async ({ request }) => {
             brand: "Madame"
         },
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization ": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdGVzdC53b3JrcGF5LmNvLmtlL2FwaS92Mi91c2VyL2xvZ2luIiwiaWF0IjoxNzgyNDAxNDQ4LCJleHAiOjE3ODI0NDQ2NDgsIm5iZiI6MTc4MjQwMTQ0OCwianRpIjoiTjZaWEhMRlc2TXJESGJzTyIsInN1YiI6IjE1MzI0IiwicHJ2IjoiNTFlMmQxNjcwNzdhNmQzYjE3ZjhiYzg1YTczZTg4MjViOWFkMDlkNiIsImFmIjoiZXlKcGRpSTZJa3haZFhkeFZXeGhPRkpSTm5rMk1pOVpNekZaVFdjOVBTSXNJblpoYkhWbElqb2lNMlJ3VkVaR2NUSTVhWGRUYkU4clNWUTJUMHRaWmtsMVowMVZWa0UyYUVvMWRVRlRVbkIxYTI5NGVqTnBaRnBTVWtOT0wzbG9RazlKUkcxcFlVaDFZeUlzSW0xaFl5STZJalJrTTJZNU1EaGlaRGxoTUdZMFltSXhOVEZqT1ROaU1tUmtPV0UwWmpnME5Ua3lNR0V5TldWa04yUXpOamt4TkRSaE16bGlaREE0WlRkaE5HRmlabVVpTENKMFlXY2lPaUlpZlE9PSJ9.YvAwdT_d0_2AyHh6xX7Y4NujUbqXKkmmDEzuxaMwbRA"
         }
     })
     const responseBody = await postresponse.json();
